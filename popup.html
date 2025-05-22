@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Text Extractor</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            width: 400px;
+            padding: 16px;
+            margin: 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea#extractedText {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 12px;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        textarea#extractedText:focus {
+            outline: none;
+            border-color: #2196f3;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        button {
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background: #2196f3;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background: #1976d2;
+        }
+
+        button:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2196f3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 8px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-message {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <textarea id="extractedText" readonly placeholder="Extracting text..."></textarea>
+        <div class="loading">
+            <div class="spinner"></div>
+            <div>Extracting text...</div>
+        </div>
+        <div class="error-message"></div>
+        <div class="button-group">
+            <button id="copyButton">Copy Text</button>
+            <button id="multiTabButton">Extract from All Tabs</button>
+        </div>
+        <div class="status-bar">
+            <span id="statusText"></span>
+            <span id="charCount">0 characters</span>
+        </div>
+    </div>
+    <script src="dist/popup.js" type="module"></script>
+</body>
+
+</html>
